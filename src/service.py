@@ -127,7 +127,7 @@ async def process_client(cr, cw):
         bs = await asyncio.wait_for(cr.readexactly(2), timeout = 10.0)
         size = int.from_bytes(bs, byteorder="big")
         incoming = await cr.readexactly(size)
-        logging.info(incoming)
+        logging.debug(incoming)
     except asyncio.TimeoutError:
         BLOCKLIST.append(addr)
         cw.close()
@@ -155,7 +155,7 @@ async def process_client(cr, cw):
         user_pwd = request.expr.password
         rrr = request.expr.expression
         user_ip = addr
-        if ((user_ip in BLOCKLIST)):
+        if user_ip in BLOCKLIST:
             logging.error("Client in blocklisted.")
             cw.close()
             return
@@ -166,17 +166,21 @@ async def process_client(cr, cw):
             if expr_result == "Invalid Expression":
                 if addr in HITLIST:
                     if HITLIST[addr] < 3:
+                        logging.warning(f"{addr} gains a hit!")
                         HITLIST[addr] += 1
                         return
                     else:
+                        logging.critical(f"{addr} is blocklisted!")
                         BLOCKLIST.append(addr)
                         cw.close()
                         return
                 else:
+                    logging.warning(f"{addr} added to hitlist!")
                     HITLIST[addr] = 1
                     cw.close()
                     return
             elif expr_result is None:
+                logging.critical(f"{addr} is blocklisted!")
                 BLOCKLIST.append(addr)
                 cw.close()
                 return
@@ -214,7 +218,7 @@ async def process_client(cr, cw):
 
 def main():
     coloredlogs.install(level='INFO')
-    logging.info(True)
+    logging.warning("Server starting!")
     loop = asyncio.get_event_loop()
     f = asyncio.start_server(process_client, host=None, port=1300)
     loop.run_until_complete(f)
