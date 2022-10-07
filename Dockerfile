@@ -14,4 +14,4 @@ copy /src/ /app/
 
 #run chmod +x /app/solution.py
 
-entrypoint ["python3", "/app/solution.py"]  
+entrypoint ["python3", "/app/service.py"]  
