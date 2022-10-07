@@ -14,7 +14,7 @@ The service runs on TCP port #1300.
 This service implements a simple protocol using Google's Protobuf (v3) Messages.
 Each message is preceded by a 2 byte integer specifying the length of the following message.
 The messages are of the following types:
-
+```
 Requests {
 	Expression(username, password, expression)
 	Stop()
@@ -26,7 +26,7 @@ Response {
 	Stop()
 	Reset()
 }
-
+```
 Notes:
 1. An expression request is when a client sends its user crednetials to the server, along with an expression to be computed. 
 The server typically stores usernames and password hashes (using PHC string formatting) and checks for correctness of said credentials 
@@ -50,9 +50,9 @@ Building and running:
 In order to build and run this server locally, please do the following:
 	1. Clone this repo.
 	2. Make sure you have docker installed.
-	3. CD to this directory and Run: docker build -t authd -f Dockerfile .
-	4. Once you have the image, run: docker run -it --rm -p 1300:1300 -v ./src/users.toml:/tmp/users.toml authd /tmp/users.toml
-	5. To stop, run: docker stop authd
+	3. CD to this directory and Run: ```docker build -t authd -f Dockerfile .```
+	4. Once you have the image, run: ```docker run -it --rm -p 1300:1300 -v ./src/users.toml:/tmp/users.toml authd /tmp/users.toml```
+	5. To stop, run: ```docker stop authd```
 
 
  
