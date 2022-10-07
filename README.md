@@ -51,9 +51,9 @@ In order to build and run this server locally, please do the following:
 
 1. Clone this repo.
 2. Make sure you have docker installed.	
-3. CD to this directory and Run: docker build -t authd -f Dockerfile .	
-4. Once you have the image, run: docker run -it --rm -p 1300:1300 -v ./src/users.toml:/tmp/users.toml authd /tmp/users.toml	
-5. To stop, run: docker stop authd
+3. CD to this directory and Run: ```docker build -t authd -f Dockerfile .```	
+4. Once you have the image, run: ```docker run -it --rm -p 1300:1300 -v ./src/users.toml:/tmp/users.toml authd /tmp/users.toml```	
+5. To stop, run: ```docker stop authd```
 
 
  
