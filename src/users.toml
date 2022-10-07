@@ -1,0 +1,7 @@
+[[users]]
+username = "mario"
+password_hash = "$argon2id$v=19$m=65536,t=3,p=1$g/CeU8p5733PmVOq9R6DkA$QB+aA9ry4vZMhgmCDdWWBc4Bo8SDTSwLV+H8UUSoGO4"
+
+[[users]]
+username = "luigi"
+password_hash = "$5$rounds=535000$KXabkqjRS9WfMw2V$MEBaT9Hcbdvcg4f9s7LGCR.lUE2u8OeslxVlsaXZD29"
