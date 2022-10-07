@@ -3,18 +3,18 @@
 Tanay Mehra
 (Please do not use and/or distribute this code without permission!. Thank you!)
 
-AUTHENTICATION SERVER
+# AUTHENTICATION SERVER
 
 This is a prototype for a network service that provides password authentication.
 It is designed to be relisient against Denial-of-Service and Password Guessing attacks.
 
-Specifics:
+## Specifics:
 
 The service runs on TCP port #1300.
 This service implements a simple protocol using Google's Protobuf (v3) Messages.
 Each message is preceded by a 2 byte integer specifying the length of the following message.
 The messages are of the following types:
-
+```
 Requests {
 	Expression(username, password, expression)
 	Stop()
@@ -26,8 +26,8 @@ Response {
 	Stop()
 	Reset()
 }
-
-Notes:
+```
+### Notes:
 1. An expression request is when a client sends its user crednetials to the server, along with an expression to be computed. 
 The server typically stores usernames and password hashes (using PHC string formatting) and checks for correctness of said credentials 
 before evaluating the expression and returning the result.
@@ -46,13 +46,18 @@ before evaluating the expression and returning the result.
 
 4. responses to the requests are created, serialized and sent by the server. A failed authentication or expression evaluation will merit a null result from the server.
 
-Building and running:
+## Building and running:
 In order to build and run this server locally, please do the following:
+
 	1. Clone this repo.
+	
 	2. Make sure you have docker installed.
-	3. CD to this directory and Run: docker build -t authd -f Dockerfile .
-	4. Once you have the image, run: docker run -it --rm -p 1300:1300 -v ./src/users.toml:/tmp/users.toml authd /tmp/users.toml
-	5. To stop, run: docker stop authd
+	
+	3. CD to this directory and Run: ```docker build -t authd -f Dockerfile .```
+	
+	4. Once you have the image, run: ```docker run -it --rm -p 1300:1300 -v ./src/users.toml:/tmp/users.toml authd /tmp/users.toml```
+	
+	5. To stop, run: ```docker stop authd```
 
 
  
